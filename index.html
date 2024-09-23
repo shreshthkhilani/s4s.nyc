@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shuffle Images</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .image-container {
+      position: relative;
+      height: 80vh; /* 80% of viewport height */
+      width: auto; /* Ensure width adjusts based on the image */
+      max-width: 80vw; /* Limit width to 80% of the viewport */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .static-image, .rotating-image {
+      height: 100%;
+      object-fit: contain; /* Prevent stretching, maintain aspect ratio */
+      position: absolute;
+    }
+
+    .rotating-image {
+      animation: rotate 12s linear infinite;
+    }
+
+    .static-image {
+      z-index: 1;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Keyframes for shuffling animation */
+    @keyframes shuffle {
+      0% { transform: translate(0, 0); }
+      20% { transform: translate(-100px, 50px); }
+      40% { transform: translate(100px, -80px); }
+      60% { transform: translate(-120px, 120px); }
+      80% { transform: translate(80px, -50px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    .shuffling {
+      animation: shuffle 2s ease-out;
+    }
+
+    /* Bottom message bar styled like Windows 95 Solitaire */
+    .message-bar {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 11pt;
+      text-align: right;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="image-container">
+    <!-- Static background image -->
+    <img class="static-image" src="puzzle4puzzle.png" alt="Static Image">
+
+    <!-- Rotating image -->
+    <img class="rotating-image" src="hearts4details.png" alt="Rotating Image">
+  </div>
+
+  <!-- Message Bar -->
+  <div class="message-bar" id="message-bar">Click to see details.</div>
+
+  <script>
+    const staticImage = document.querySelector('.static-image');
+    const rotatingImage = document.querySelector('.rotating-image');
+    const messageBar = document.getElementById('message-bar');
+    let isStaticImageInFront = true;
+
+    // Shuffle the image and switch the z-index on click
+    document.body.addEventListener('click', () => {
+      // Add the shuffling animation to the static image
+      staticImage.classList.add('shuffling');
+
+      // After the shuffle animation ends, switch the z-index of the images
+      setTimeout(() => {
+        staticImage.classList.remove('shuffling');
+
+        // Toggle z-index based on the current state
+        if (isStaticImageInFront) {
+          staticImage.style.zIndex = 1;
+          rotatingImage.style.zIndex = 2;
+        } else {
+          staticImage.style.zIndex = 2;
+          rotatingImage.style.zIndex = 1;
+        }
+
+        // Toggle the flag for the next click
+        isStaticImageInFront = !isStaticImageInFront;
+      }, 2000); // Length of the shuffling animation (2 seconds)
+    });
+  </script>
+</body>
+</html>
