@@ -5,84 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:url" content="https://s4s.nyc" />
   <meta property="og:title" content="💌 sophie and shreshth 🦪" />
-  <meta property="og:image" content="https://s4s.nyc/hearts.png" />
+  <meta property="og:image" content="https://s4s.nyc/img/hearts.png" />
   <title>💌 sophie and shreshth 🦪</title>
-  <link rel="icon" href="h.png">
-  <style>
-    body {
-      background-color: #f0f0f0;
-      min-height: 100vh;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .image-container {
-      width: 100%;
-      flex: 1;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .static-image, .rotating-image {
-      max-height: 80vh;
-      max-width: 100%;
-    }
-
-    .rotating-image {
-      z-index: 1;
-    }
-
-    @keyframes rotate {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(-360deg);
-      }
-    }
-
-    @keyframes slingshot {
-      0% { transform: translate(0, 0); }
-      70% { transform: translate(-130px, -60px); }
-      90% { transform: translate(-180px, -120px); }
-      100% { transform: translate(0, 0); }
-    }
-
-    .sling {
-      animation: slingshot 2s;
-    }
-
-    .message-bar {
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 11pt;
-      text-align: right;
-      padding: 10px;
-    }
-  </style>
+  <link rel="icon" href="img/h.png">
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
   <div class="image-container">
-    <img class="static-image" src="puzzle4puzzle.png" alt="Static Image">
-    <img class="rotating-image" src="hearts4details.png" alt="Rotating Image">
+    <img class="static-image" src="img/puzzle4puzzle.png" alt="Static Image">
+    <img class="rotating-image" src="img/hearts4details.png" alt="Rotating Image">
   </div>
   <div class="message-bar">click to spin...</div>
-  <script>
-    const staticImage = document.querySelector('.static-image');
-    const rotatingImage = document.querySelector('.rotating-image');
-
-    document.body.addEventListener('click', () => {
-      rotatingImage.style.animation = null;
-      staticImage.classList.add('sling');
-
-      setTimeout(() => {
-        staticImage.classList.remove('sling');
-        rotatingImage.style.animation = 'rotate 12s linear 1';
-      }, 2000);
-    });
-  </script>
+  <script src="index.js"></script>
 </body>
 </html>
